@@ -1,5 +1,6 @@
 # app_mysql.py
 from flask import Flask
+from flask_migrate import Migrate
 from connections.mysql.config import conexion_config
 from connections.mysql.routes import bp_mysql
 from connections.mysql.models import db
@@ -12,8 +13,13 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Registramos las RUTAS desde el BLUEPRINT
 app.register_blueprint(bp_mysql)
 
-# Registramos la INSTANCIA de la BD
+# Inicializar la BD
 db.init_app(app)
+
+# Inicializamos MIGRATE
+migrate = Migrate(app, db)
+
+# Crear tablas si es necesario
 with app.app_context():
     db.create_all()
 

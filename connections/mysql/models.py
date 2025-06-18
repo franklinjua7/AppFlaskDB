@@ -13,6 +13,7 @@ class Student(db.Model):
     lastname = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
     age = db.Column(db.Integer)
+    dni = db.Column(db.String(8), nullable=False)
     grade = db.Column(db.Integer)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     bio = db.Column(db.Text)
